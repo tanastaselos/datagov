@@ -58,13 +58,13 @@ const dateFormatter = new DateFormatter();
 dateFormatter.dateFormat = 'E';
 
 widget.setPadding(verticalPadding, horizontalPadding, verticalPadding, horizontalPadding);
-widget.url = 'https://impfdashboard.de';
+widget.url = 'https://tanastaselos.com';
 
 
 let data = await loadData();
 
 const headerStack = widget.addStack();
-const header = headerStack.addText('💉 Impfdashboard'.toUpperCase());
+const header = headerStack.addText('💉 Vaccinations'.toUpperCase());
 header.font = Font.mediumSystemFont(10);
 
 widget.addSpacer(4);
@@ -171,7 +171,7 @@ function createStack(superView, data, inverse = false, centerAlignText = false) 
 }
 
 async function loadData() {
-  const url = 'https://github.com/tanastaselos/datagov/blob/main/data/full-de.json';
+  const url = 'https://raw.githubusercontent.com/tanastaselos/datagov/main/data/data-gr.json';
   const request = new Request(url);
   const records = await request.loadJSON();
 
