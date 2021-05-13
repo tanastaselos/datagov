@@ -25,6 +25,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Adapted from https://github.com/DerLobi/impfdashboard-scriptable-widget
+
 const localizedStrings = {
   'first.vaccinations': {
     de: 'Mindestens\nErstgeimpfte',
@@ -180,7 +182,7 @@ async function loadData() {
   const data = {
     firstVaccinations: {
       title: localized('first.vaccinations'),
-      stringValue: lastRecord.impf_quote_erst.toLocaleString(locale, {
+      stringValue: lastRecord.totaldose1.toLocaleString(locale, {
         style: 'percent',
         minimumFractionDigits: 0,
         maximumFractionDigits: 2,
@@ -188,7 +190,7 @@ async function loadData() {
     },
     fullVaccinations: {
       title: localized('fully.vaccinated'),
-      stringValue: lastRecord.impf_quote_voll.toLocaleString(locale, {
+      stringValue: lastRecord.totaldose2.toLocaleString(locale, {
         style: 'percent',
         minimumFractionDigits: 0,
         maximumFractionDigits: 2,
@@ -196,7 +198,7 @@ async function loadData() {
     },
     dosesCumulative: {
       title: localized('cumulative.doses'),
-      stringValue: new Intl.NumberFormat(locale, { notation: 'compact', compactDisplay: 'short', maximumFractionDigits: 1 }).format(lastRecord.dosen_kumulativ),
+      stringValue: new Intl.NumberFormat(locale, { notation: 'compact', compactDisplay: 'short', maximumFractionDigits: 1 }).format(lastRecord.totalvaccinations),
     },
     dosesToday: {
       title: new Date(lastRecord.date).toLocaleString(locale, {
@@ -205,11 +207,11 @@ async function loadData() {
         month: '2-digit',
         day: '2-digit',
       }),
-      stringValue: `+${lastRecord.dosen_differenz_zum_vortag.toLocaleString()}`,
+      stringValue: `+${lastRecord.totaldaily.toLocaleString()}`,
     },
     dosesLastWeeks: records.map((record) => ({
       date: record.date,
-      amount: record.dosen_differenz_zum_vortag,
+      amount: record.totaldaily,
     })),
   };
 
